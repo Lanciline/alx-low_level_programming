@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include "main.h"
 	/**
 	 * main - print _putchar
@@ -20,3 +21,9 @@
 	return (0);
 	}
 
+=======
+#include<stdio.h>
+int main (void){
+	printf("_putchar /n");
+	return0;
+>>>>>>> af3bf74eda74fbc16b97d90c60f7e1c142ee1c61
