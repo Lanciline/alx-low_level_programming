@@ -1,38 +1,43 @@
 #include <stdlib.h>
 #include "main.h"
+#include <string.h>
 
 /**
- * *string_nconcat - concatenates n bytes of a string to another string
+ * string_nconcat -concatenates m bytes a string to another string.
  * @s1: string to append to
- * @s2: string to concatenate from
- * @n: number of bytes from s2 to concatenate to s1
- *
+ * @s2: string to concatenates from
+ * @m: number of bytes from s2 to concatenate to s1
  * Return: pointer to the resulting string
  */
-char *string_nconcat(char *s1, char *s2, unsigned int n)
+char *string_nconcat(char *s1, char *s2, unsigned int m)
 {
-	char *s;
-	unsigned int i = 0, j = 0, len1 = 0, len2 = 0;
+	unsigned int len_s1, len_s2;
+	char *result;
 
-	while (s1 && s1[len1])
-		len1++;
-	while (s2 && s2[len2])
-		len2++;
-	if (n < len2)
-		s = malloc(sizeof(char) * (len1 + n + 1));
-	else
-		s = malloc(sizeof(char) * (len1 + len2 + 1));
-	if (!s)
-		return (NULL);
-	while (i < len1)
+	if (s1 == NULL)
 	{
-		s[i] = s1[i];	
-		i++;
+		s1 = "";
 	}
-	while (n < len2 && i < (len1 + n))
-		s[i++] = s2[j++];
-	while (n >= len2 && i < (len1 + len2))
-		s[i++] = s2[j++];
-	s[i] = '\0';
-	return (s);
+
+	if (s2 == NULL)
+	{
+		s2 = "";
+	}
+	len_s1 = strlen(s1);
+	len_s2 = strlen(s2);
+
+	if (m >= len_s2)
+	{
+		m = len_s2;
+	}
+	result = malloc(len_s1 + m + 1);
+
+	if (result == NULL)
+	{
+		return (NULL);
+	}
+	memcpy(result, s1, len_s1);
+	memcpy(result + len_s1, s2, m);
+	result[len_s1 + m] = '\0';
+	return (result);
 }
