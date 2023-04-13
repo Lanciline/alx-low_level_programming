@@ -1,24 +1,29 @@
 #include "main.h"
+#include <stdlib.h>
 /**
- * array_range - function that creates an array of chars,
- *  and initializes it with a specific char
- * @min: first bytes of the memory
- * @max: first bytes of the memory
- * Return: pointer to the resulting string dests
+ * array_range - creates an array of integers.
+ * @min: minimum value.
+ * @max: maximum value.
+ *
+ * Return: pointer to the newly created array.
+ * if man > mix, returns NULL.
+ * if malloc fails, returns NULL.
  */
 int *array_range(int min, int max)
 {
-	int *s;
+	int *ar;
 	int i;
 
 	if (min > max)
 		return (NULL);
-	s = malloc((max - min + 1) * sizeof(int));
-	if (s == NULL)
+
+	ar = malloc(sizeof(*ar) * ((max - min) + 1));
+
+	if (ar == NULL)
 		return (NULL);
-	for (i = 0; i <= max - min; i++)
-	{
-		s[i] = min + i;
-	}
-	return (s);
+
+	for (i = 0; min <= max; i++, min++)
+		ar[i] = min;
+
+	return (ar);
 }
