@@ -1,44 +1,51 @@
+#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "dog.h"
-
 /**
- * new_dog -all for new dog
- * @name: name to dog
- * @age: age to dog
- * @owner: owner to dog
- *
- * Return: pointer
+ * new_dog - entry point
+ * @name: size of triangle
+ * @age: size of triangle
+ * @owner: size of triangle
+ * Description: --
+ * Return: --
  */
-
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	dog_t *m;
+	dog_t *dog;
+	int i;
+	int ownerL = 0;
+	int nameL = 0;
 
-	m = malloc(sizeof(dog_t));
-	if (m == NULL)
+	while (name[nameL])
+		nameL++;
+	while (owner[ownerL])
+		ownerL++;
+	dog = malloc(sizeof(dog_t));
+	if (dog == NULL)
+		return (NULL);
+	dog->name = malloc(sizeof(char) * (nameL + 1));
+	if (dog->name == NULL)
 	{
+		free(dog);
 		return (NULL);
 	}
-
-	m->name = malloc(strlen(name) + 1);
-	if (m->name == NULL)
+	for (i = 0; name[i] != '\0'; i++)
 	{
-		free(m);
+		dog->name[i] = name[i];
+	}
+	dog->name[i] = '\0';
+	dog->owner = malloc(sizeof(char) * (ownerL + 1));
+	if (dog->owner == NULL)
+	{
+		free(dog->name);
+		free(dog);
 		return (NULL);
 	}
-	strcpy(m->name, name);
-
-	m->owner = malloc(strlen(owner) + 1);
-	if (m->owner == NULL)
+	for (i = 0; owner[i] != '\0'; i++)
 	{
-		free(m->owner);
-		free(m);
-		return (NULL);
+		dog->owner[i] = owner[i];
 	}
-	strcpy(m->owner, owner);
-
-	m->age = age;
-
-	return (m);
+	dog->owner[i] = '\0';
+	dog->age = age;
+	return (dog);
 }
